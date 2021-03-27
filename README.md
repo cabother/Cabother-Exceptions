@@ -24,4 +24,5 @@ https://www.nuget.org/packages/Cabother.Exceptions/
 | InternalServerErrorException        | Quando houver error interno no processamento da request | {personalMessage}                                        |
 | PreconditionFailedException         | Condição definida no cabeçalho da request não atendida  | {personalMessage}                                        |
 | UnexpectedResponseException         | Condição não atendida para processar regra de negócio   | {personalMessage}                                        |
+| WebServiceException                 | Erro no processamento de chamadas para web services     | {personalMessage}                                        |
 
