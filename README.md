@@ -12,9 +12,9 @@ https://www.nuget.org/packages/Cabother.Exceptions/
 | ----------------------------------- | ------------------------------------------------------- | -------------------------------------------------------- |
 | ConfigurationNotFoundException      | Solicitado uma configuração, e esta não é encontrada    | Configuration key '{configurationKey}' not found         |
 | EnvironmentVariableInvalidException | Solicitado o valor de uma ENV, e esta não é encontrada  | Environment variable '{variableName}' don't parametrized |
-| EntityNotFoundException             | Entidade não encontrada no banco de dados               | {personalErrorCode} - {message}                          |
-| MySqlDatabaseException              | Exceção interna em banco de dados do tipo MySql         | {message}                                                |
-| OracleDatabaseException             | Exceção interna em banco de dados do tipo Oracle        | {message}                                                |
+| EntityNotFoundException             | Entidade não encontrada no banco de dados               | {personalErrorCode} - {personalMessage}                  |
+| MySqlDatabaseException              | Exceção interna em banco de dados do tipo MySql         | {personalMessage}                                        |
+| OracleDatabaseException             | Exceção interna em banco de dados do tipo Oracle        | {personalMessage}                                        |
 | RepositoryNotFoundException         | Repositório não é encontrado no banco de dados          | Not found {entity}'s repository                          |
 | BadGatewayException                 | Servidor recebe uma resposta ruim de outro              | {personalMessage}                                        |
 | BadRequestException                 | Servidor não pode ou não irá processar a requisição     | {personalMessage}                                        |
