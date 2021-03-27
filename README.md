@@ -1,4 +1,4 @@
-# Cabother-Exceptions
+# Cabother Exceptions
 
 Biblioteca de apoio ao uso de exceptions customizadas
 
