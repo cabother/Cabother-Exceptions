@@ -26,3 +26,4 @@ https://www.nuget.org/packages/Cabother.Exceptions/
 | UnexpectedResponseException         | Condição não atendida para processar regra de negócio   | {personalMessage}                                        |
 | WebServiceException                 | Erro no processamento de chamadas para web services     | {personalMessage}                                        |
 
+<a href="https://www.buymeacoffee.com/cabother" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> 
