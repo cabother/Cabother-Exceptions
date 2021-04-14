@@ -17,6 +17,7 @@
     <Authors>Renato Fernandes Soares</Authors>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIcon>exceptions.png</PackageIcon>
+    <PackageTags>Custom;Exceptions</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
