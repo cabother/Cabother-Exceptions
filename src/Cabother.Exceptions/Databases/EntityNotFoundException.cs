@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.Serialization;
-using Cabother.Exceptions.Extensions;
 
 namespace Cabother.Exceptions.Databases
 {
@@ -8,13 +7,18 @@ namespace Cabother.Exceptions.Databases
     /// Exceção quando uma entidade não é encontrada
     /// </summary>
     [Serializable]
-    public sealed class EntityNotFoundException : Exception
+    public sealed class EntityNotFoundException : BaseException
     {
+        private static string BuildMessage(string entity) =>
+            $"{entity} not found";
+
+        private string _entity;
+        
         /// <summary>
         /// Retorna uma nova instância de <see cref="EntityNotFoundException"/>
         /// </summary>
-        /// <param name="info">Informações do objeto sobre a exceção que está sendo lançada</param>
-        /// <param name="context">Informação de local onde a exception será lançada, seu contexto de origem/destino</param>
+        /// <param name="info">Informações para a serialização</param>
+        /// <param name="context">Contexto para o stream</param>
         private EntityNotFoundException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -23,14 +27,35 @@ namespace Cabother.Exceptions.Databases
         /// <summary>
         /// Entidade que não foi encontrada
         /// </summary>
-        public string Entity { get; }
+        public string Entity
+        {
+            get => _entity;
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Entity cannot be null.");
+
+                _entity = value;
+            }
+        }
 
         /// <summary>
         /// Retorna uma nova instância de <see cref="EntityNotFoundException"/>
         /// </summary>
         /// <param name="entity">Nome da entidade que não foi encontrada</param>
         public EntityNotFoundException(string entity)
-            : base($"{entity} not found")
+            : base(BuildMessage(entity))
+        {
+            Entity = entity;
+        }
+
+        /// <summary>
+        /// Retorna uma nova instância de <see cref="EntityNotFoundException"/>
+        /// </summary>
+        /// <param name="entity">Nome da entidade que não foi encontrada</param>
+        /// <param name="errorCode">Código do erro</param>
+        public EntityNotFoundException(string entity, string errorCode)
+            : base(BuildMessage(entity), errorCode)
         {
             Entity = entity;
         }
@@ -40,8 +65,9 @@ namespace Cabother.Exceptions.Databases
         /// </summary>
         /// <param name="entity">Nome da entidade que não foi encontrada</param>
         /// <param name="message">Mensagem descritiva do erro</param>
-        public EntityNotFoundException(string entity, string message)
-            : base(message)
+        /// <param name="errorCode">Código de identificação do erro</param>
+        public EntityNotFoundException(string entity, string errorCode, string message)
+            : base(message, errorCode)
         {
             Entity = entity;
         }
@@ -50,10 +76,10 @@ namespace Cabother.Exceptions.Databases
         /// Retorna uma nova instância de <see cref="EntityNotFoundException"/>
         /// </summary>
         /// <param name="entity">Nome da entidade que não foi encontrada</param>
-        /// <param name="message">Mensagem descritiva do erro</param>
-        /// <param name="inner">Inner Exception</param>
-        public EntityNotFoundException(string entity, string message, Exception inner)
-            : base(message, inner)
+        /// <param name="errorCode">Código de identificação do erro</param>
+        /// <param name="innerException">Erro interno ocorrido</param>
+        public EntityNotFoundException(string entity, string errorCode, Exception innerException)
+            : base(BuildMessage(entity), errorCode, innerException)
         {
             Entity = entity;
         }
@@ -61,14 +87,24 @@ namespace Cabother.Exceptions.Databases
         /// <summary>
         /// Retorna uma nova instância de <see cref="EntityNotFoundException"/>
         /// </summary>
-        /// <param name="errorCode">Código que identifica o erro ocorrido</param>
         /// <param name="entity">Nome da entidade que não foi encontrada</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
         /// <param name="message">Mensagem descritiva do erro</param>
-        public EntityNotFoundException(int errorCode, string entity, string message)
-            : base($"#{errorCode} - {message}")
+        /// <param name="innerException">Erro interno ocorrido</param>
+        public EntityNotFoundException(string entity, string errorCode, string message, Exception innerException)
+            : base(message, errorCode, innerException)
         {
-            this.AddErrorCode(errorCode.ToString());
+            Entity = entity;
+        }
 
+        /// <summary>
+        /// Retorna uma nova instância de <see cref="EntityNotFoundException"/>
+        /// </summary>
+        /// <param name="entity">Nome da entidade que não foi encontrada</param>
+        /// <param name="innerException">Erro interno ocorrido</param>
+        public EntityNotFoundException(string entity, Exception innerException)
+            : base(BuildMessage(entity), innerException)
+        {
             Entity = entity;
         }
     }

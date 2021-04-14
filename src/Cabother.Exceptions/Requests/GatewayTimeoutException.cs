@@ -7,7 +7,7 @@ namespace Cabother.Exceptions.Requests
     /// Exceção de Timeout do Gateway
     /// </summary>
     [Serializable]
-    public class GatewayTimeoutException : Exception
+    public class GatewayTimeoutException : BaseException
     {
         /// <summary>
         /// Cria uma nova instância de <see cref="GatewayTimeoutException"/>
@@ -24,7 +24,18 @@ namespace Cabother.Exceptions.Requests
         /// Cria uma nova instância de <see cref="GatewayTimeoutException"/>
         /// </summary>
         /// <param name="message">Mensagem descritiva da exceção</param>
-        public GatewayTimeoutException(string message) : base(message)
+        public GatewayTimeoutException(string message) 
+            : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Cria uma nova instância de <see cref="GatewayTimeoutException"/>
+        /// </summary>
+        /// <param name="message">Mensagem descritiva da exceção</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        public GatewayTimeoutException(string message, string errorCode) 
+            : base(message, errorCode)
         {
         }
 

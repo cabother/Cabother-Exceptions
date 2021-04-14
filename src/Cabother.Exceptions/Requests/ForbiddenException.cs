@@ -7,7 +7,7 @@ namespace Cabother.Exceptions.Requests
     /// Exceção de Forbidden
     /// </summary>
     [Serializable]
-    public class ForbiddenException : Exception
+    public class ForbiddenException : BaseException
     {
 
         /// <summary>
@@ -18,17 +18,26 @@ namespace Cabother.Exceptions.Requests
         private ForbiddenException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-
         }
 
         /// <summary>
         /// Cria uma nova instância de <see cref="ForbiddenException"/>
         /// </summary>
         /// <param name="message">Mensagem descritiva da exceção</param>
-        public ForbiddenException(string message) : base(message)
+        public ForbiddenException(string message) 
+            : base(message)
         {
-
         }
 
+        /// <summary>
+        /// Cria uma nova instância de <see cref="ForbiddenException"/>
+        /// </summary>
+        /// <param name="message">Mensagem descritiva da exceção</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        public ForbiddenException(string message, string errorCode) 
+            : base(message, errorCode)
+        {
+        }
+        
     }
 }
