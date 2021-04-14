@@ -7,7 +7,7 @@ namespace Cabother.Exceptions.Requests
     /// Exceção de falha na pré-condição nas entidades
     /// </summary>
     [Serializable]
-    public class PreconditionFailedException : Exception
+    public class PreconditionFailedException : BaseException
     {
         /// <summary>
         /// Cria uma nova instância de <see cref="PreconditionFailedException"/>
@@ -24,9 +24,19 @@ namespace Cabother.Exceptions.Requests
         /// Cria uma nova instância de <see cref="PreconditionFailedException"/>
         /// </summary>
         /// <param name="message">Mensagem descritiva da exceção</param>
-        public PreconditionFailedException(string message) : base(message)
+        public PreconditionFailedException(string message) 
+            : base(message)
         {
         }
 
+        /// <summary>
+        /// Cria uma nova instância de <see cref="PreconditionFailedException"/>
+        /// </summary>
+        /// <param name="message">Mensagem descritiva da exceção</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        public PreconditionFailedException(string message, string errorCode) 
+            : base(message, errorCode)
+        {
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Cabother.Exceptions.Requests
     /// Exceção quando uma entidade não é encontrada
     /// </summary>
     [Serializable]
-    public sealed class BadRequestException : Exception
+    public sealed class BadRequestException : BaseException
     {
         /// <summary>
         /// Cria uma nova instância de <see cref="BadRequestException"/>
@@ -24,9 +24,40 @@ namespace Cabother.Exceptions.Requests
         /// Cria uma nova instância de <see cref="BadRequestException"/>
         /// </summary>
         /// <param name="message">Mensagem descritiva da exceção</param>
-        public BadRequestException(string message) : base(message)
+        public BadRequestException(string message) 
+            : base(message)
         {
+        }
 
+        /// <summary>
+        /// Cria uma nova instância de <see cref="BadRequestException"/>
+        /// </summary>
+        /// <param name="message">Mensagem descritiva da exceção</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        public BadRequestException(string message, string errorCode)
+            : base(message, errorCode)
+        {
+        }
+
+        /// <summary>
+        /// Cria uma nova instância de <see cref="BadRequestException"/>
+        /// </summary>
+        /// <param name="message">Mensagem descritiva da exceção</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        /// <param name="innerException">Erro interno</param>
+        public BadRequestException(string message, string errorCode, Exception innerException)
+            : base(message, errorCode, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Cria uma nova instância de <see cref="BadRequestException"/>
+        /// </summary>
+        /// <param name="message">Mensagem descritiva da exceção</param>
+        /// <param name="innerException">Erro interno</param>
+        public BadRequestException(string message, Exception innerException)
+            : base(message, innerException)
+        {
         }
     }
 }

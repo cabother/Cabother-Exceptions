@@ -7,7 +7,7 @@ namespace Cabother.Exceptions.Requests
     /// Exceção para quando o valor de uma resposta não seja esperado
     /// </summary>
     [Serializable]
-    public sealed class UnexpectedResponseException : Exception
+    public sealed class UnexpectedResponseException : BaseException
     {
         /// <summary>
         /// Cria uma nova instância de <see cref="UnexpectedResponseException"/>
@@ -25,6 +25,16 @@ namespace Cabother.Exceptions.Requests
         /// <param name="message">Mensagem da exceção</param>
         public UnexpectedResponseException(string message)
             : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Cria uma nova instância de <see cref="UnexpectedResponseException"/>
+        /// </summary>
+        /// <param name="message">Mensagem da exceção</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        public UnexpectedResponseException(string message, string errorCode)
+            : base(message, errorCode)
         {
         }
     }

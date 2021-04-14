@@ -47,15 +47,14 @@ namespace Cabother.Exceptions.Extensions
         public static InternalServerErrorException ToInternalServerException(
             this Exception exception,
             ILogger logger,
-            int code,
+            string code,
             string message,
             params object[] args)
         {
-            var errorMessage = string.Format($"#{code} - {message}: {exception.Message}", args);
-
-            var newEx = new InternalServerErrorException(errorMessage, exception);
-            newEx.AddErrorCode(code.ToString());
-            logger.LogError(code, exception, errorMessage);
+            var newEx = new InternalServerErrorException(message, code, exception);
+            
+            // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
+            logger.LogError(exception, newEx.ToString());
 
             return newEx;
         }
