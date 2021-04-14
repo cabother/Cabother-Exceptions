@@ -1,4 +1,5 @@
 using System;
+using Cabother.Exceptions.Databases;
 using Cabother.Exceptions.Requests;
 using Microsoft.Extensions.Logging;
 
@@ -35,28 +36,103 @@ namespace Cabother.Exceptions.Extensions
             return exception.Data["ErrorCode"]?.ToString();
         }
 
+        #region InernalServerException
+
         /// <summary>
-        /// Monta InternalServerErrorException e imprimir um log de erro de acordo com os parâmetros.
+        /// Converte para InternalServerErrorException.
         /// </summary>
         /// <param name="exception">Exceção lançada.</param>
-        /// <param name="logger">Objeto para impressão da mensagem de log.</param>
         /// <param name="code">Código do erro à ser mostrado na mensagem.</param>
         /// <param name="message">Mensagem complementar à ser mostrada no log e na exceção.</param>
-        /// <param name="args">Uma lista de objetos que contém um ou mais objetos para formatar com a mensagem.</param>
         /// <returns>Exceção do tipo <see cref="InternalServerErrorException"/> com a mensagem gerada.</returns>
         public static InternalServerErrorException ToInternalServerException(
             this Exception exception,
-            ILogger logger,
             string code,
-            string message,
-            params object[] args)
-        {
-            var newEx = new InternalServerErrorException(message, code, exception);
-            
-            // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
-            logger.LogError(exception, newEx.ToString());
+            string message) =>
+            new InternalServerErrorException(message, code, exception);
 
-            return newEx;
-        }
+        /// <summary>
+        /// Converte para InternalServerErrorException.
+        /// </summary>
+        /// <param name="exception">Exceção lançada.</param>
+        /// <param name="message">Mensagem complementar à ser mostrada no log e na exceção.</param>
+        /// <returns>Exceção do tipo <see cref="InternalServerErrorException"/> com a mensagem gerada.</returns>
+        public static InternalServerErrorException ToInternalServerErrorException(
+            this Exception exception,
+            string message) =>
+            new InternalServerErrorException(message, exception);
+
+        #endregion
+        
+        #region EntityNotFoundException
+
+        /// <summary>
+        /// Converte a exceção para o tipo <see cref="EntityNotFoundException"/>
+        /// </summary>
+        /// <param name="exception">Exceção original</param>
+        /// <param name="entity">Nome da entidade não encontrada</param>
+        /// <returns>Retorna exceção do tipo <see cref="EntityNotFoundException"/></returns>
+        public static EntityNotFoundException ToEntityNotFoundException(
+            this Exception exception,
+            string entity) =>
+            new EntityNotFoundException(entity, exception);
+
+        /// <summary>
+        /// Converte a exceção para o tipo <see cref="EntityNotFoundException"/>
+        /// </summary>
+        /// <param name="exception">Exceção original</param>
+        /// <param name="entity">Nome da entidade não encontrada</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        /// <returns>Retorna exceção do tipo <see cref="EntityNotFoundException"/></returns>
+        public static EntityNotFoundException ToEntityNotFoundException(
+            this Exception exception,
+            string entity,
+            string errorCode) =>
+            new EntityNotFoundException(entity, errorCode, exception);
+
+        /// <summary>
+        /// Converte a exceção para o tipo <see cref="EntityNotFoundException"/>
+        /// </summary>
+        /// <param name="exception">Exceção original</param>
+        /// <param name="entity">Nome da entidade não encontrada</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        /// <param name="message">Mensagem descritiva da nova exceção</param>
+        /// <returns>Retorna exceção do tipo <see cref="EntityNotFoundException"/></returns>
+        public static EntityNotFoundException ToEntityNotFoundException(
+            this Exception exception,
+            string entity,
+            string errorCode,
+            string message) =>
+            new EntityNotFoundException(entity, errorCode, message, exception);
+        
+        #endregion
+        
+        #region
+
+        /// <summary>
+        /// Converte a exceção para o tipo <see cref="ConflictException"/>
+        /// </summary>
+        /// <param name="exception">Exceção original</param>
+        /// <param name="message">Mensagem descritiva da nova exceção</param>
+        /// <returns>Retorna exceção do tipo <see cref="ConflictException"/></returns>
+        public static ConflictException ToConflictException(
+            this Exception exception,
+            string message) =>
+            new ConflictException(message, exception);
+
+        /// <summary>
+        /// Converte a exceção para o tipo <see cref="ConflictException"/>
+        /// </summary>
+        /// <param name="exception">Exceção original</param>
+        /// <param name="message">Mensagem descritiva da nova exceção</param>
+        /// <param name="errorCode">Código de identificação do erro</param>
+        /// <returns>Retorna exceção do tipo <see cref="ConflictException"/></returns>
+        public static ConflictException ToConflictException(
+            this Exception exception,
+            string message,
+            string errorCode) =>
+            new ConflictException(message, errorCode, exception);
+
+        #endregion
     }
 }
