@@ -42,6 +42,20 @@ namespace Cabother.Exceptions.Extensions
         /// Converte para InternalServerErrorException.
         /// </summary>
         /// <param name="exception">Exceção lançada.</param>
+        /// <param name="code">Código do erro à ser mostrado na mensagem.</param>
+        /// <param name="message">Mensagem complementar à ser mostrada no log e na exceção.</param>
+        /// <returns>Exceção do tipo <see cref="InternalServerErrorException"/> com a mensagem gerada.</returns>
+        public static InternalServerErrorException ToInternalServerErrorException(
+            this Exception exception,
+            string code,
+            string message) =>
+            new InternalServerErrorException(message, code, exception);
+
+
+        /// <summary>
+        /// Converte para InternalServerErrorException.
+        /// </summary>
+        /// <param name="exception">Exceção lançada.</param>
         /// <param name="message">Mensagem complementar à ser mostrada no log e na exceção.</param>
         /// <returns>Exceção do tipo <see cref="InternalServerErrorException"/> com a mensagem gerada.</returns>
         public static InternalServerErrorException ToInternalServerErrorException(
