@@ -40,7 +40,7 @@ namespace Cabother.Exceptions.Requests
         }
 
         /// <summary>
-        /// Cria uma nova instância de <see cref="ConflictException"/>
+        /// Cria uma nova instância de <see cref="UnauthorizedException"/>
         /// </summary>
         /// <param name="message">Mensagem descritiva da exceção</param>
         /// <param name="errorCode">Código de identificação do erro</param>

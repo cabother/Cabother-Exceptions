@@ -9,9 +9,14 @@ namespace Cabother.Exceptions.WebServices
     [Serializable]
     public class WebServiceException : Exception
     {
-
+        /// <summary>
+        /// Método do WebService invocado
+        /// </summary>
         public string Method { get; }
 
+        /// <summary>
+        /// Código do erro retornado pelo WebService
+        /// </summary>
         public int? ErrorCode { get; }
 
         /// <summary>

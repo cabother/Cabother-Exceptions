@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace Cabother.Exceptions.Databases
 {
+    /// <summary>
+    /// Exceção quando o repositório de uma entidade não é encontrado
+    /// </summary>
     [Serializable]
     public sealed class RepositoryNotFoundException : BaseException
     {
