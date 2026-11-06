@@ -5,6 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Cabother.Exceptions.Extensions
 {
+    /// <summary>
+    /// Extensões para manipulação e conversão de exceções
+    /// </summary>
     public static class ExceptionExtensions
     {
         /// <summary>
